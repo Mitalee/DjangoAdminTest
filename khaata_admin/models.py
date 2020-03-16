@@ -1,4 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser, Permission
+
+
+class User(AbstractUser):
+    link_to_user = models.IntegerField(null=True)
+
+    def save(self, *args, **kwargs):
+        self.is_staff = True
+        super(User, self).save(*args, **kwargs)
+        permission = Permission.objects.get(name='Can view settlement summary')
+        self.user_permissions.add(permission)
+
 
 # Create your models here.
 class SettlementSummary(models.Model):

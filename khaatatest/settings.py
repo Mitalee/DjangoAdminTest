@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'khaatatest.khaata_admin',
+    'khaata_admin',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +52,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'khaatatest.urls'
+
+AUTH_USER_MODEL = 'khaata_admin.User'
 
 TEMPLATES = [
     {
