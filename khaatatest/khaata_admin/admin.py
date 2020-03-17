@@ -4,6 +4,13 @@ from django.utils.html import format_html
 
 # Register your models here.
 class SettlementSummaryAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        qs = super(SettlementSummaryAdmin, self).get_queryset(request)
+        user_id = request.user.id
+        if request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(user_id=request.user.id)
     list_display = ('user_id', 'view_records_link', 'total_num_transactions', 'settlement_id','report_id','total_amount','start_date','end_date','deposit_date')
     # list_display_links = ('transaction_id',)
     list_filter = ('user_id','settlement_id')
